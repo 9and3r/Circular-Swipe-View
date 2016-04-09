@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Circular Swipe View</string>
+    <string name="description">Circular Swipe View is a view for Android Wear.\n\nIt allows to scroll making circular swipes in the edge of the watch.\n\nOpen the companion app. You will find two examples:\n\n- Scrolling a list\n- Zoom in a map</string>
 </resources>

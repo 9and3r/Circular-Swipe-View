@@ -1,6 +1,7 @@
 package com.and3r.circularswipeview.examples.list;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.support.wearable.view.WearableListView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +19,8 @@ import java.util.ArrayList;
  */
 public class AppListAdapter extends WearableListView.Adapter {
 
-    private ArrayList<AppInfo> apps;
-    private final LayoutInflater mInflater;
+    protected ArrayList<AppInfo> apps;
+    protected final LayoutInflater mInflater;
 
     public AppListAdapter(Context context, ArrayList<AppInfo> pApps){
         mInflater = LayoutInflater.from(context);
@@ -45,7 +46,6 @@ public class AppListAdapter extends WearableListView.Adapter {
         return apps.size();
     }
 
-
     public static class ItemViewHolder extends WearableListView.ViewHolder {
 
         public TextView textView;
@@ -58,5 +58,6 @@ public class AppListAdapter extends WearableListView.Adapter {
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
         }
     }
+
 
 }

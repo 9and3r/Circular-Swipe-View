@@ -1,16 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.and3r.circularswipeview.CircularSwipeView
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:id="@+id/circular_swipe_view">
+    android:layout_width="match_parent">
 
-    <com.and3r.circularswipeview.CircularSwipeWearableListView
-        android:id="@+id/wearable_list"
+    <android.support.wearable.view.BoxInsetLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
-    </com.and3r.circularswipeview.CircularSwipeWearableListView>
 
-</com.and3r.circularswipeview.CircularSwipeView>
+        <com.and3r.circularswipeview.CircularSwipeView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:id="@+id/circular_swipe_view">
+
+            <com.and3r.circularswipeview.CircularSwipeWearableListView
+                android:id="@+id/wearable_list"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent">
+            </com.and3r.circularswipeview.CircularSwipeWearableListView>
+
+        </com.and3r.circularswipeview.CircularSwipeView>
+
+
+    </android.support.wearable.view.BoxInsetLayout>
+
+    <android.support.wearable.view.DismissOverlayView
+        android:id="@+id/dismiss_overlay"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
+</FrameLayout>

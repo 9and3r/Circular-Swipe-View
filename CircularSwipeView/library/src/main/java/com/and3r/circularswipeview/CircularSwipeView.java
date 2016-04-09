@@ -2,6 +2,7 @@ package com.and3r.circularswipeview;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.EventLog;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -9,7 +10,7 @@ import android.widget.FrameLayout;
 public class CircularSwipeView extends FrameLayout{
 
 
-
+    private MotionEvent lastEvent;
     private double previousAngle;
     private int centerX;
     private int centerY;
@@ -24,7 +25,12 @@ public class CircularSwipeView extends FrameLayout{
     private float startY;
     private long startTime;
 
+
+    private Runnable longClickRunnable;
+
     private double totalScroll;
+
+
 
 
     public CircularSwipeView(Context context) {
@@ -49,6 +55,12 @@ public class CircularSwipeView extends FrameLayout{
 
     private void init(){
         setEnabled(false);
+        longClickRunnable = new Runnable() {
+            @Override
+            public void run() {
+                handleLongClick();
+            }
+        };
     }
 
     @Override
@@ -72,6 +84,7 @@ public class CircularSwipeView extends FrameLayout{
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
+        lastEvent = event;
             switch (event.getActionMasked()){
                 case MotionEvent.ACTION_DOWN:
                     handleActionDown(event);
@@ -91,6 +104,7 @@ public class CircularSwipeView extends FrameLayout{
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        lastEvent = event;
         switch (event.getActionMasked()){
             case MotionEvent.ACTION_DOWN:
                 handleActionDown(event);
@@ -119,6 +133,7 @@ public class CircularSwipeView extends FrameLayout{
             startDistance = distance;
             possibleScroll = true;
         }
+        postDelayed(longClickRunnable, 1000);
     }
 
     private boolean handleActionMove(MotionEvent event){
@@ -136,16 +151,29 @@ public class CircularSwipeView extends FrameLayout{
         return false;
     }
 
+    private boolean handleLongClick(){
+        if (lastEvent != null &&
+                (lastEvent.getActionMasked() != MotionEvent.ACTION_DOWN ||
+                lastEvent.getActionMasked() != MotionEvent.ACTION_MOVE) &&
+                Math.abs(startX-lastEvent.getX()) < 10 &&
+                Math.abs(startY- lastEvent.getY()) <10 &&
+                System.currentTimeMillis()-startTime > 1000){
+            performLongClick();
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     private void handleActionUp(MotionEvent event){
-        if (hasOnClickListeners() &&
-                Math.abs(startX-event.getX()) < 10 &&
-                Math.abs(startY- event.getY()) <10 &&
-                System.currentTimeMillis()-startTime < 1000){
-            performClick();
+        if (Math.abs(startX-event.getX()) < 10 && Math.abs(startY- event.getY()) <10
+            & hasOnClickListeners() && System.currentTimeMillis()-startTime < 1000){
+                performClick();
         }
     }
 
     private void handleActionUpOrCancel(){
+        removeCallbacks(longClickRunnable);
         possibleScroll = false;
         totalScroll = 0;
         int size = getChildCount();

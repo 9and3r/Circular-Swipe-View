@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Circular Swipe View</string>
+    <string name="long_press_intro">Make a long press to exit</string>
+
+
+    <string name="map_example">Map example</string>
+    <string name="list_example">List example</string>
 </resources>

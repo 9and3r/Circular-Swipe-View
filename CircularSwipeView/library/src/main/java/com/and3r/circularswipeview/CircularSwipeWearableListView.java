@@ -32,6 +32,9 @@ public class CircularSwipeWearableListView extends WearableListView implements S
 
     private void init(){
         addOnCentralPositionChangedListener(this);
+
+        // Touch events will be handled by CircularSwipeView
+        setEnabled(false);
     }
 
     @Override
@@ -41,6 +44,7 @@ public class CircularSwipeWearableListView extends WearableListView implements S
 
     @Override
     public void onScrollFinished() {
+        // Scroll to put the nearest item in the central position
         smoothScrollToPosition(centralPosition);
     }
 
