@@ -2,9 +2,9 @@
 
 Circular Swipe View is a view for Android Wear.
 
-It allows to scroll making circular swipes in the edge of the watch.
+Android wear watches have little screen. Because of that, little swipes must be done to scroll through a list. To avoid that this view allows to scroll making circular swipes in the edge of the watch doing one continuous swipe.
 
-You can download the sample apk, install it on your phone and open the companion app. You will find two examples:
+You can [download the sample apk](https://github.com/9and3r/Circular-Swipe-View/raw/master/CircularSwipeView/app/app-release.apk), install it on your phone and open the companion app. You will find two examples:
 - Scrolling a list
 - Zoom in a map
 
